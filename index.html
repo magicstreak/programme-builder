@@ -141,12 +141,22 @@ const walkDatabase = {
 
 // Calendar Workspace containing specific instances
 let calendarSchedule = [
-    { id: 0, date: "2026-10-03", time: "10:00 AM", walkid: "W_001" },
-    { id: 1, date: "2026-10-10", time: "09:30 AM", walkid: "W_002", overrides: { distance: "6.0 miles (Valley Route)", description: "Diverting through valley due to wind alerts on the ridge." } },
-    { id: 2, date: "2026-10-17", time: "11:00 AM", walkid: "W_001" }
+    { id: 0, date: "2026-10-03", time: "10:00", walkid: "W_001" },
+    { id: 1, date: "2026-10-10", time: "09:30", walkid: "W_002", overrides: { distance: "6.0 miles (Valley Route)", description: "Diverting through valley due to wind alerts on the ridge." } },
+    { id: 2, date: "2026-10-17", time: "11:00", walkid: "W_001" }
 ];
 
 let currentEditingId = null;
+
+function formatTimeForDisplay(value) {
+    if (!value) return 'N/A';
+    const match = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(value);
+    if (!match) return value;
+    const [hours, minutes] = match.slice(1).map(Number);
+    const suffix = hours >= 12 ? 'PM' : 'AM';
+    const displayHour = ((hours + 11) % 12) + 1;
+    return `${displayHour}:${String(minutes).padStart(2, '0')} ${suffix}`;
+}
 
 function renderSchedule() {
     const container = document.getElementById('schedule');
@@ -170,12 +180,12 @@ function renderSchedule() {
             item.innerHTML = `
                 <div>
                     <div class="walk-date">${formatDate(slot.date)}</div>
-                    <div class="walk-time">⏰ ${slot.time}</div>
+                    <div class="walk-time">⏰ ${formatTimeForDisplay(slot.time)}</div>
                 </div>
                 <div class="edit-form">
                     <div class="form-row">
                         <div class="form-group"><label>Date</label><input type="date" id="edit-date-${slot.id}" value="${slot.date}"></div>
-                        <div class="form-group"><label>Time Override</label><input type="text" id="edit-time-${slot.id}" value="${slot.overrides?.time || ''}" placeholder="Master: ${slot.time}"></div>
+                        <div class="form-group"><label>Time Override</label><input type="time" id="edit-time-${slot.id}" value="${slot.overrides?.time || slot.time || ''}" min="00:00" max="23:59" step="60"></div>
                     </div>
                     <div class="form-group"><label>Title Override</label><input type="text" id="edit-title-${slot.id}" value="${slot.overrides?.title || ''}" placeholder="Master: ${base.title}"></div>
                     <div class="form-row">
@@ -193,7 +203,7 @@ function renderSchedule() {
             item.innerHTML = `
                 <div>
                     <div class="walk-date">${formatDate(slot.date)}</div>
-                    <div class="walk-time">⏰ ${time}</div>
+                    <div class="walk-time">⏰ ${formatTimeForDisplay(time)}</div>
                 </div>
                 <div>
                     <div class="card-actions"><button class="btn btn-secondary" style="padding: 5px 10px; font-size:0.85em;" onclick="enterEditMode(${slot.id})">✏️ Edit Card</button></div>
@@ -231,8 +241,13 @@ function saveOverride(id) {
     if (oDiff) over.difficulty = oDiff;
     if (oDesc) over.description = oDesc;
 
-    if (Object.keys(over).length > 0) { calendarSchedule[idx].overrides = over; } 
-    else { delete calendarSchedule[idx].overrides; }
+    if (Object.keys(over).length > 0) {
+        calendarSchedule[idx].overrides = { ...calendarSchedule[idx].overrides, ...over };
+    } else {
+        delete calendarSchedule[idx].overrides;
+    }
+
+    calendarSchedule[idx].time = oTime || calendarSchedule[idx].time;
 
     currentEditingId = null;
     renderSchedule();
