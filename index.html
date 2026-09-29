@@ -86,7 +86,7 @@ h1 { color: var(--primary); margin: 0; }
 .form-group label { font-size: 0.85em; font-weight: 600; color: #6c757d; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
-input[type="text"], input[type="date"], textarea {
+input[type="text"], input[type="date"], input[type="time"], textarea {
     width: 100%;
     padding: 8px 12px;
     border: 1px solid var(--border);
@@ -161,6 +161,7 @@ function renderSchedule() {
         const distance = slot.overrides?.distance || base.distance || "N/A";
         const difficulty = slot.overrides?.difficulty || base.difficulty || "N/A";
         const description = slot.overrides?.description || base.description || "";
+        const time = slot.overrides?.time || slot.time || "N/A";
 
         const item = document.createElement('div');
         item.className = `schedule-item ${hasOverrides ? 'is-modified' : ''} ${currentEditingId === slot.id ? 'is-editing' : ''}`;
@@ -174,7 +175,7 @@ function renderSchedule() {
                 <div class="edit-form">
                     <div class="form-row">
                         <div class="form-group"><label>Date</label><input type="date" id="edit-date-${slot.id}" value="${slot.date}"></div>
-                        <div class="form-group"><label>Time</label><input type="text" id="edit-time-${slot.id}" value="${slot.time}"></div>
+                        <div class="form-group"><label>Time Override</label><input type="text" id="edit-time-${slot.id}" value="${slot.overrides?.time || ''}" placeholder="Master: ${slot.time}"></div>
                     </div>
                     <div class="form-group"><label>Title Override</label><input type="text" id="edit-title-${slot.id}" value="${slot.overrides?.title || ''}" placeholder="Master: ${base.title}"></div>
                     <div class="form-row">
@@ -185,14 +186,14 @@ function renderSchedule() {
                     <div class="edit-buttons">
                         <button class="btn" onclick="saveOverride(${slot.id})">Save Changes</button>
                         <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
-                        ${hasOverrides ? `<button class="btn btn-danger" style="margin-left: auto;" onclick="resetToMaster(\${slot.id})">Reset to Master</button>` : ''}
+                        ${hasOverrides ? `<button class="btn btn-danger" style="margin-left: auto;" onclick="resetToMaster(${slot.id})">Reset to Master</button>` : ''}
                     </div>
                 </div>`;
         } else {
             item.innerHTML = `
                 <div>
                     <div class="walk-date">${formatDate(slot.date)}</div>
-                    <div class="walk-time">⏰ ${slot.time}</div>
+                    <div class="walk-time">⏰ ${time}</div>
                 </div>
                 <div>
                     <div class="card-actions"><button class="btn btn-secondary" style="padding: 5px 10px; font-size:0.85em;" onclick="enterEditMode(${slot.id})">✏️ Edit Card</button></div>
@@ -216,14 +217,15 @@ function saveOverride(id) {
     if (idx === -1) return;
 
     calendarSchedule[idx].date = document.getElementById(`edit-date-${id}`).value;
-    calendarSchedule[idx].time = document.getElementById(`edit-time-${id}`).value;
 
+    const oTime = document.getElementById(`edit-time-${id}`).value.trim();
     const oTitle = document.getElementById(`edit-title-${id}`).value.trim();
     const oDist = document.getElementById(`edit-distance-${id}`).value.trim();
     const oDiff = document.getElementById(`edit-difficulty-${id}`).value.trim();
     const oDesc = document.getElementById(`edit-desc-${id}`).value.trim();
 
     const over = {};
+    if (oTime) over.time = oTime;
     if (oTitle) over.title = oTitle;
     if (oDist) over.distance = oDist;
     if (oDiff) over.difficulty = oDiff;
