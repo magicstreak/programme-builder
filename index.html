@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iterative Programme Builder</title>
+    <style>
+    :root {
+    --primary: #2e7d32;
+    --primary-hover: #1b5e20;
+    --bg: #f8f9fa;
+    --text: #212529;
+    --card-bg: #ffffff;
+    --border: #dee2e6;
+    --warning: #f57c00;
+}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 15px;
+}
+h1 { color: var(--primary); margin: 0; }
+
+.btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+.btn:hover { background-color: var(--primary-hover); }
+.btn-secondary { background-color: #6c757d; }
+.btn-secondary:hover { background-color: #5a6268; }
+.btn-danger { background-color: #dc3545; }
+.btn-danger:hover { background-color: #bd2130; }
+
+.schedule-list { display: flex; flex-direction: column; gap: 20px; }
+
+.schedule-item {
+    background: var(--card-bg);
+    border-left: 6px solid var(--primary);
+    border-radius: 6px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    position: relative;
+}
+.schedule-item.is-modified { border-left-color: var(--warning); }
+.schedule-item.is-editing { box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.4); }
+
+.walk-date { font-weight: bold; color: #495057; font-size: 1.1em; }
+.walk-time { font-size: 0.9em; color: #6c757d; margin-top: 5px; }
+.walk-title { font-size: 1.35em; font-weight: 700; margin: 0 0 10px 0; color: var(--primary); }
+.schedule-item.is-modified .walk-title { color: #cc6600; }
+
+.walk-meta { display: flex; gap: 15px; font-size: 0.9em; color: #495057; margin-bottom: 12px; flex-wrap: wrap; }
+.meta-tag { background: #e8f5e9; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+.schedule-item.is-modified .meta-tag { background: #fff3e0; }
+
+.walk-desc { font-size: 0.95em; line-height: 1.6; color: #555; margin: 0; }
+.badge { font-size: 0.7em; padding: 3px 8px; border-radius: 12px; font-weight: 600; margin-left: 10px; display: inline-block; vertical-align: middle; }
+.badge-modified { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.card-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 8px; }
+
+.edit-form { display: flex; flex-direction: column; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 0.85em; font-weight: 600; color: #6c757d; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95em;
+    box-sizing: border-box;
+}
+textarea { resize: vertical; min-height: 80px; }
+.edit-buttons { display: flex; gap: 10px; margin-top: 5px; }
+
+@media (max-width: 650px) {
+    .schedule-item { grid-template-columns: 1fr; gap: 15px; padding-top: 50px; }
+    .card-actions { top: 15px; right: 15px; }
+    .form-row { grid-template-columns: 1fr; }
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>🗺️ CBMW Programme Builder</h1>
+            <p style="color: #6c757d; margin: 5px 0 0 0;">Click "Edit Card" to apply single-use changes for this specific schedule item.</p>
+        </div>
+        <p> </p>
+        <button class="btn" onclick="exportData()">💾 Export JSON</button>
+                <button class="btn" onclick=""> Export PDF</button>
+    </header>
+
+    <div id="schedule" class="schedule-list"></div>
+</div>
+
+<script>
+// Master Reference Database (Never modified by edits)
+const walkDatabase = {
+    "W_001": {
+        title: "Riverside Nature Trail",
+        distance: "5.2 miles",
+        difficulty: "Easy",
+        description: "A scenic, flat walk alongside the riverbank. Great for bird spotting."
+    },
+    "W_002": {
+        title: "Mountain Ridge Trek",
+        distance: "8.5 miles",
+        difficulty: "Hard",
+        description: "A strenuous climb up the rocky north ridge with panoramic views."
+    }
+};
+
+// Calendar Workspace containing specific instances
+let calendarSchedule = [
+    { id: 0, date: "2026-10-03", time: "10:00 AM", walkid: "W_001" },
+    { id: 1, date: "2026-10-10", time: "09:30 AM", walkid: "W_002", overrides: { distance: "6.0 miles (Valley Route)", description: "Diverting through valley due to wind alerts on the ridge." } },
+    { id: 2, date: "2026-10-17", time: "11:00 AM", walkid: "W_001" }
+];
+
+let currentEditingId = null;
+
+function renderSchedule() {
+    const container = document.getElementById('schedule');
+    container.innerHTML = '';
+    calendarSchedule.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    calendarSchedule.forEach(slot => {
+        const base = walkDatabase[slot.walkid] || {};
+        const hasOverrides = !!slot.overrides;
+        
+        const title = slot.overrides?.title || base.title || "Unknown Walk";
+        const distance = slot.overrides?.distance || base.distance || "N/A";
+        const difficulty = slot.overrides?.difficulty || base.difficulty || "N/A";
+        const description = slot.overrides?.description || base.description || "";
+
+        const item = document.createElement('div');
+        item.className = `schedule-item ${hasOverrides ? 'is-modified' : ''} ${currentEditingId === slot.id ? 'is-editing' : ''}`;
+
+        if (currentEditingId === slot.id) {
+            item.innerHTML = `
+                <div>
+                    <div class="walk-date">${formatDate(slot.date)}</div>
+                    <div class="walk-time">⏰ ${slot.time}</div>
+                </div>
+                <div class="edit-form">
+                    <div class="form-row">
+                        <div class="form-group"><label>Date</label><input type="date" id="edit-date-${slot.id}" value="${slot.date}"></div>
+                        <div class="form-group"><label>Time</label><input type="text" id="edit-time-${slot.id}" value="${slot.time}"></div>
+                    </div>
+                    <div class="form-group"><label>Title Override</label><input type="text" id="edit-title-${slot.id}" value="${slot.overrides?.title || ''}" placeholder="Master: ${base.title}"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Distance Override</label><input type="text" id="edit-distance-${slot.id}" value="${slot.overrides?.distance || ''}" placeholder="Master: ${base.distance}"></div>
+                        <div class="form-group"><label>Difficulty Override</label><input type="text" id="edit-difficulty-${slot.id}" value="${slot.overrides?.difficulty || ''}" placeholder="Master: ${base.difficulty}"></div>
+                    </div>
+                    <div class="form-group"><label>Description Override</label><textarea id="edit-desc-${slot.id}" placeholder="Master: ${base.description}">${slot.overrides?.description || ''}</textarea></div>
+                    <div class="edit-buttons">
+                        <button class="btn" onclick="saveOverride(${slot.id})">Save Changes</button>
+                        <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                        ${hasOverrides ? `<button class="btn btn-danger" style="margin-left: auto;" onclick="resetToMaster(\${slot.id})">Reset to Master</button>` : ''}
+                    </div>
+                </div>`;
+        } else {
+            item.innerHTML = `
+                <div>
+                    <div class="walk-date">${formatDate(slot.date)}</div>
+                    <div class="walk-time">⏰ ${slot.time}</div>
+                </div>
+                <div>
+                    <div class="card-actions"><button class="btn btn-secondary" style="padding: 5px 10px; font-size:0.85em;" onclick="enterEditMode(${slot.id})">✏️ Edit Card</button></div>
+                    <h2 class="walk-title">${title}${hasOverrides ? '<span class="badge badge-modified">Modified</span>' : ''}</h2>
+                    <div class="walk-meta">
+                        <span>📏 <strong>Distance:</strong> ${distance}</span>
+                        <span>🥾 <strong>Difficulty:</strong> <span class="meta-tag">${difficulty}</span></span>
+                    </div>
+                    <p class="walk-desc">${description || '<em>No description available.</em>'}</p>
+                </div>`;
+        }
+        container.appendChild(item);
+    });
+}
+
+function enterEditMode(id) { currentEditingId = id; renderSchedule(); }
+function cancelEdit() { currentEditingId = null; renderSchedule(); }
+
+function saveOverride(id) {
+    const idx = calendarSchedule.findIndex(item => item.id === id);
+    if (idx === -1) return;
+
+    calendarSchedule[idx].date = document.getElementById(`edit-date-${id}`).value;
+    calendarSchedule[idx].time = document.getElementById(`edit-time-${id}`).value;
+
+    const oTitle = document.getElementById(`edit-title-${id}`).value.trim();
+    const oDist = document.getElementById(`edit-distance-${id}`).value.trim();
+    const oDiff = document.getElementById(`edit-difficulty-${id}`).value.trim();
+    const oDesc = document.getElementById(`edit-desc-${id}`).value.trim();
+
+    const over = {};
+    if (oTitle) over.title = oTitle;
+    if (oDist) over.distance = oDist;
+    if (oDiff) over.difficulty = oDiff;
+    if (oDesc) over.description = oDesc;
+
+    if (Object.keys(over).length > 0) { calendarSchedule[idx].overrides = over; } 
+    else { delete calendarSchedule[idx].overrides; }
+
+    currentEditingId = null;
+    renderSchedule();
+}
+
+function resetToMaster(id) {
+    const idx = calendarSchedule.findIndex(item => item.id === id);
+    if (idx !== -1) delete calendarSchedule[idx].overrides;
+    currentEditingId = null;
+    renderSchedule();
+}
+
+function formatDate(dateStr) {
+    if(!dateStr) return "No Date";
+    const targetDate = new Date(dateStr + 'T00:00:00');
+    return targetDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function exportData() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(calendarSchedule, null, 2));
+    const dl = document.createElement('a');
+    dl.setAttribute("href", dataStr);
+    dl.setAttribute("download", "programme_schedule_output.json");
+    document.body.appendChild(dl);
+    dl.click();
+    dl.remove();
+}
+
+window.onload = renderSchedule;
+
+</script>
+</body>
+</html>
