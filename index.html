@@ -6,7 +6,7 @@
 <title>Iterative Programme Builder</title>
 <style>
 :root{--primary:#2e7d32;--primary-hover:#1b5e20;--bg:#f8f9fa;--text:#212529;--card-bg:#fff;--border:#dee2e6;--warning:#f57c00;--muted:#6c757d}
-*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:20px}.container{max-width:950px;margin:0 auto}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;border-bottom:2px solid var(--border);padding-bottom:15px}h1{color:var(--primary);margin:0}.header-actions{display:flex;gap:8px}.btn{background:var(--primary);color:#fff;border:0;padding:10px 16px;border-radius:4px;cursor:pointer;font-weight:600;font-size:.95em}.btn:hover{background:var(--primary-hover)}.btn-secondary{background:#6c757d}.btn-secondary:hover{background:#5a6268}.btn-danger{background:#dc3545}.btn-danger:hover{background:#bd2130}.btn-link{background:transparent;color:var(--muted);border:1px solid var(--border);padding:6px 10px}.btn-link:hover{background:#f3f4f5}.filter-section{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:20px;margin-bottom:18px;box-shadow:0 2px 4px rgba(0,0,0,.05)}.filter-title{font-weight:600;color:var(--primary);margin:0 0 15px}.filter-controls{display:grid;grid-template-columns:1.2fr 1.2fr 1.5fr 1fr auto auto;gap:12px;align-items:end}.filter-group{display:flex;flex-direction:column;gap:5px}.field-with-clear{display:flex;gap:8px;align-items:end}.field-with-clear input,.field-with-clear select{flex:1}.filter-group label{font-size:.85em;font-weight:600;color:#6c757d}input,select,textarea{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:.95em}input[type="date"]:read-only{background-color:#f0f0f0;color:#6c757d;cursor:not-allowed}textarea{resize:vertical;min-height:80px}.filter-info{font-size:.85em;color:#6c757d;margin-top:12px}.summary-card{background:#edf7ee;border:1px solid #cfe8d5;border-radius:6px;padding:16px;margin-bottom:18px}.summary-title{font-weight:700;color:var(--primary);margin:0 0 8px}.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.summary-item{background:#fff;border:1px solid #d7eadb;border-radius:4px;padding:10px}.summary-label{font-size:.75em;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.summary-value{font-size:1rem;font-weight:700;margin-top:4px;color:#1f2d1f}.schedule-list{display:flex;flex-direction:column;gap:20px}.schedule-item{background:var(--card-bg);border-left:6px solid var(--primary);border-radius:6px;padding:24px;box-shadow:0 4px 6px rgba(0,0,0,.05);display:grid;grid-template-columns:160px 1fr;gap:20px;position:relative}.schedule-item.is-modified{border-left-color:var(--warning)}.schedule-item.is-editing{box-shadow:0 0 0 3px rgba(46,125,50,.4)}.walk-date{font-weight:bold;color:#495057;font-size:1.1em}.walk-time{font-size:.9em;color:#6c757d;margin-top:5px}.walk-title{font-size:1.35em;font-weight:700;margin:0 0 10px;color:var(--primary)}.schedule-item.is-modified .walk-title{color:#c60}.walk-meta{display:flex;gap:15px;font-size:.9em;color:#495057;margin-bottom:12px;flex-wrap:wrap}.meta-tag{background:#e8f5e9;padding:2px 8px;border-radius:4px;font-weight:500}.schedule-item.is-modified .meta-tag{background:#fff3e0}.walk-desc{font-size:.95em;line-height:1.6;color:#555;margin:0}.badge{font-size:.7em;padding:3px 8px;border-radius:12px;font-weight:600;margin-left:10px;display:inline-block}.badge-modified{background:#fff3cd;color:#856404;border:1px solid #ffeeba}.card-actions{position:absolute;top:20px;right:20px}.edit-form{display:flex;flex-direction:column;gap:12px}.form-group{display:flex;flex-direction:column;gap:5px}.form-group label{font-size:.85em;font-weight:600;color:#6c757d}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.edit-buttons{display:flex;gap:10px;margin-top:5px}.empty-state{text-align:center;padding:40px 20px;color:#6c757d}.print-only{display:none}@media(max-width:760px){header{display:block}.header-actions{margin-top:15px}.filter-controls{grid-template-columns:1fr}.schedule-item{grid-template-columns:1fr;gap:15px;padding-top:50px}.card-actions{top:15px;right:15px}.form-row{grid-template-columns:1fr}.field-with-clear{display:flex}.btn-link{padding:8px 10px}}@media print{body{background:#fff;padding:0}.header-actions,.filter-section,.card-actions,.btn-link{display:none!important}.container{max-width:none}.summary-card{border:none;background:#fff;padding:0;margin-bottom:12px}.schedule-item{break-inside:avoid;box-shadow:none;border-left:4px solid var(--primary);margin-bottom:12px}.print-only{display:block}.print-summary{font-size:16px;font-weight:700;color:#1f2d1f;margin-bottom:10px}} 
+*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:20px}.container{max-width:950px;margin:0 auto}.header-actions{display:flex;gap:10px;margin-top:20px}.schedule-item{border-left:6px solid #dee2e6;padding:20px;margin:15px 0;background:#fff;border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}.schedule-item.grade-e{border-left-color:#4caf50}.schedule-item.grade-m{border-left-color:#2196f3}.schedule-item.grade-ms{border-left-color:#f44336}.schedule-item.grade-s{border-left-color:#9c27b0}.schedule-item.grade-vs{border-left-color:#212529}.walk-title{margin:10px 0;font-size:1.3em}.walk-meta{display:flex;flex-wrap:wrap;gap:15px;margin:10px 0;font-size:0.95em}.meta-tag{background:#e8e8e8;padding:2px 6px;border-radius:3px;font-weight:500}.walk-desc{margin:10px 0;line-height:1.5}.walk-date{font-size:1.1em;font-weight:bold;color:var(--text)}.walk-time{color:var(--muted);margin:5px 0}.summary-card{background:#f0f7f0;border-left:4px solid var(--primary);padding:20px;margin:20px 0;border-radius:4px}.summary-title{font-size:1.1em;font-weight:bold;margin-bottom:15px;color:var(--text)}.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px}.summary-item{text-align:center}.summary-label{font-size:0.85em;color:var(--muted);text-transform:uppercase}.summary-value{font-size:1.2em;font-weight:bold;color:var(--primary);margin-top:5px}.btn{padding:10px 15px;border:none;border-radius:4px;background:var(--primary);color:#fff;cursor:pointer;font-size:0.95em;transition:background 0.2s}.btn:hover{background:var(--primary-hover)}.btn-secondary{background:var(--muted)}.btn-secondary:hover{background:#5a6268}.btn-link{background:none;color:var(--primary);text-decoration:underline;padding:5px 10px}.btn-link:hover{background:none}.btn-danger{background:#dc3545}.btn-danger:hover{background:#c82333}.filter-section{background:#fff;padding:20px;border-radius:4px;margin:20px 0;box-shadow:0 1px 3px rgba(0,0,0,0.1)}.filter-title{font-size:1.1em;font-weight:bold;margin-bottom:15px}.filter-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;align-items:flex-end}.filter-group{display:flex;flex-direction:column}.filter-group label{margin-bottom:5px;font-weight:500;font-size:0.9em}.filter-group input,.filter-group select{padding:8px;border:1px solid var(--border);border-radius:4px;font-size:0.9em}.field-with-clear{display:flex;gap:5px}.field-with-clear input{flex:1}.filter-info{margin-top:15px;padding:10px;background:#e8f5e9;border-radius:4px;font-size:0.9em;color:#2e7d32}.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}.schedule-list{margin:20px 0}.edit-form{background:#f9f9f9;padding:15px;border-radius:4px;margin-top:10px}.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.form-group{display:flex;flex-direction:column}.form-group label{font-weight:500;margin-bottom:5px;font-size:0.9em}.form-group input,.form-group textarea{padding:8px;border:1px solid var(--border);border-radius:4px;font-size:0.9em;font-family:inherit}.form-group textarea{resize:vertical;min-height:80px}.edit-buttons{display:flex;gap:10px;margin-top:15px}.card-actions{margin-bottom:10px}.badge{display:inline-block;padding:4px 8px;border-radius:3px;font-size:0.85em;font-weight:bold}.badge-modified{background:#fff3cd;color:#856404}.walk-directions{background:#f0f7f0;padding:10px;border-radius:4px;margin-top:10px;font-size:0.95em}.print-only{display:none}@media print{.filter-section,.header-actions,.card-actions,.edit-form,.btn{display:none}.print-only{display:block;text-align:center;margin-bottom:20px;font-weight:bold}.schedule-item{page-break-inside:avoid}}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap}h1{margin:0;font-size:1.8em}header>div:first-child p{margin:5px 0}
 </style>
 </head>
 <body>
@@ -18,6 +18,7 @@
 <div id="print-summary" class="print-only"></div>
 </div>
 <div class="header-actions">
+<button class="btn" onclick="exportCSV()">📊 Export CSV</button>
 <button class="btn" onclick="exportData()">💾 Export JSON</button>
 <button class="btn" onclick="exportPDF()">🖨️ Export PDF</button>
 </div>
@@ -60,7 +61,7 @@
 <button class="btn" onclick="createProgramme()">Create Programme</button>
 <button class="btn btn-secondary" onclick="clearAllFilters()">Reset All</button>
 </div>
-<div class="filter-info" id="filter-info">Select a date range and optionally filter by walk, then click Create Programme.</div>
+<div class="filter-info" id="filter-info">Loading programme database from Firebase...</div>
 </section>
 
 <section id="programme-summary" class="summary-card" aria-live="polite"></section>
@@ -68,22 +69,161 @@
 <div id="schedule" class="schedule-list"></div>
 </div>
 
-<script>
-const walkDatabase = {
-  W_001: { title: 'Riverside Nature Trail', distance: '5.2 miles', difficulty: 'Easy', description: 'A scenic, flat walk alongside the riverbank. Great for bird spotting.' },
-  W_002: { title: 'Mountain Ridge Trek', distance: '8.5 miles', difficulty: 'Hard', description: 'A strenuous climb up the rocky north ridge with panoramic views.' }
+<!-- Firebase Modular App Scripts Setup -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+// Database 1: Calendar/Bookings App Connection Configuration
+const firebaseConfigCalendar = {
+  apiKey: "AIzaSyC0hEmdWHSlBkdnxrQiNt_RITYsbj3wvi0",
+  authDomain: "cbmw-walk-scheduler.firebaseapp.com",
+  databaseURL: "https://cbmw-walk-scheduler-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "cbmw-walk-scheduler",
+  storageBucket: "cbmw-walk-scheduler.firebasestorage.app",
+  messagingSenderId: "108766389213",
+  appId: "1:108766389213:web:cded7ada3d32874b380c34",
+  measurementId: "G-QFS6HHL007"
 };
 
-let calendarSchedule=[
-  {id:0,date:'2026-10-03',time:'10:00',walkid:'W_001'},
-  {id:1,date:'2026-10-10',time:'09:30',walkid:'W_002',overrides:{distance:'6.0 miles (Valley Route)',description:'Diverting through valley due to wind alerts on the ridge.'}},
-  {id:2,date:'2026-10-17',time:'11:00',walkid:'W_001'}
-];
+// Database 2: Master Walks Database Configuration
+const firebaseConfigWalks = {
+   apiKey: "AIzaSyB9WLJSl4QmubgBW5rknmnMeHcNbkwqOHQ",
+  authDomain: "programme-planning.firebaseapp.com",
+  databaseURL: "https://programme-planning-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "programme-planning",
+  storageBucket: "programme-planning.firebasestorage.app",
+  messagingSenderId: "1028011310189",
+  appId: "1:1028011310189:web:8ac4f37a8d248899735364",
+  measurementId: "G-BBQ4Q6TQHD"
+};
+
+// Initialize distinct standalone instances
+const calendarApp = initializeApp(firebaseConfigCalendar, "calendarInstance");
+const walksApp = initializeApp(firebaseConfigWalks, "walksInstance");
+
+// Map target database connectivity layers
+const dbCalendar = getDatabase(calendarApp);
+const dbWalks = getDatabase(walksApp);
+
+// Global application working matrices
+let calendarSchedule = [];
+let walkDatabase = {};
 
 let currentEditingId = null;
 let activeFrom = '';
 let activeTo = '';
 let activeWalk = 'all';
+
+// Function to get grade color class
+function getGradeColorClass(difficulty) {
+  if (!difficulty) return '';
+  const grade = difficulty.trim().toUpperCase();
+  const gradeMap = {
+    'E': 'grade-e',
+    'M': 'grade-m',
+    'MS': 'grade-ms',
+    'S': 'grade-s',
+    'VS': 'grade-vs'
+  };
+  return gradeMap[grade] || '';
+}
+
+async function initApp() {
+  setInfo("🔄 Synchronizing parallel records from Firebase...");
+  
+  // 1. Safe fetch for Calendar Bookings (DB 1)
+  let bookingsSnapshot = null;
+  try {
+    bookingsSnapshot = await get(ref(dbCalendar, 'walk_bookings'));
+  } catch (error) {
+    console.error("❌ Failed to fetch from DB 1 (Calendar):", error);
+    setInfo("❌ Error loading calendar database check connection/rules.", true);
+  }
+
+  // 2. Safe fetch for Master Walks (DB 2)
+  let walksSnapshot = null;
+  try {
+    walksSnapshot = await get(ref(dbWalks, 'walks'));
+  } catch (error) {
+    console.error("❌ Failed to fetch from DB 2 (Walks Master):", error);
+  }
+
+  // 3. Clear existing states
+  calendarSchedule = [];
+  walkDatabase = {};
+
+  if (walksSnapshot && walksSnapshot.exists()) {
+    const rawWalksData = walksSnapshot.val();
+    walkDatabase = {};
+
+    console.group("🚀 Firebase DB 2 Fetch & Structuring Logic");
+    Object.keys(rawWalksData).forEach(walkId => {
+      const walk = rawWalksData[walkId] || {};
+      
+      walkDatabase[walkId] = {
+        title: walk.Route_Name || `Walk ${walkId}`,
+        ascent: walk.Ascent || 'N/A',
+        directions: walk.Directions || 'No directions listed.',
+        distance: walk.Distance || 'N/A',
+        dogs: walk.Dogs || 'No restrictions specified.',
+        difficulty: walk.Grade || 'N/A',
+        description: walk.Route_Description || 'No description available.',
+        scr: walk.Scr || 'N/A',
+        terrain: walk.Terrain || 'N/A',
+        total_time: walk.Total_Time || 'N/A'
+      };
+    });
+    console.groupEnd();
+  }
+
+  // 5. Process Bookings from DB 1 if they exist
+  if (bookingsSnapshot && bookingsSnapshot.exists()) {
+    const firebaseData = bookingsSnapshot.val();
+    
+    Object.keys(firebaseData).forEach((key, index) => {
+      const booking = firebaseData[key];
+      const walkId = booking.walk_number;
+      
+      const [day, month, year] = booking.date.split('-');
+      const standardDate = `${year}-${month}-${day}`;
+
+      if (!walkDatabase[walkId]) {
+        walkDatabase[walkId] = {
+          title: booking.pueblo ? `Walk to ${booking.pueblo}` : `Walk ${walkId}`,
+          ascent: 'N/A',
+          directions: 'No directions available.',
+          distance: 'Dynamic Route',
+          dogs: 'N/A',
+          difficulty: booking.walk_grade || 'N/A',
+          description: booking.notes || 'No description available.',
+          scr: 'N/A',
+          terrain: 'N/A',
+          total_time: 'N/A'
+        };
+      }
+
+      calendarSchedule.push({
+        id: index,
+        date: standardDate,
+        time: booking.start_time || '10:00',
+        walkid: walkId,
+        leader_name: booking.leader_name || 'TBD',
+        overrides: (booking.comments) ? {
+          description: booking.comments || undefined
+        } : undefined
+      });
+    });
+
+    calendarSchedule.sort((a, b) => a.date.localeCompare(b.date));
+    setInfo("✅ Data synchronized successfully.");
+  } else {
+    setInfo("⚠️ No calendar records found in primary database.");
+  }
+
+  populateWalkOptions();
+  renderSchedule();
+}
 
 function formatTime(value){
   if(!value) return 'N/A';
@@ -242,14 +382,25 @@ function renderSchedule(){
     const base = walkDatabase[slot.walkid] || {};
     const overrides = slot.overrides || {};
     const modified = Object.keys(overrides).length > 0;
+    
     const title = overrides.title || base.title || 'Unknown Walk';
     const distance = overrides.distance || base.distance || 'N/A';
     const difficulty = overrides.difficulty || base.difficulty || 'N/A';
     const description = overrides.description || base.description || '';
     const time = overrides.time || slot.time || 'N/A';
+    const ascent = base.ascent || 'N/A';
+    const directions = base.directions || '';
+    const dogs = base.dogs || 'N/A';
+    const scr = base.scr || 'N/A';
+    const terrain = base.terrain || 'N/A';
+    const total_time = base.total_time || 'N/A';
+    const leader = slot.leader_name || 'TBD';
+    
+    // Get grade color class
+    const gradeColorClass = getGradeColorClass(difficulty);
 
     const item = document.createElement('div');
-    item.className = `schedule-item ${modified ? 'is-modified' : ''} ${currentEditingId === slot.id ? 'is-editing' : ''}`;
+    item.className = `schedule-item ${gradeColorClass} ${modified ? 'is-modified' : ''} ${currentEditingId === slot.id ? 'is-editing' : ''}`;
 
     if (currentEditingId === slot.id) {
       item.innerHTML = `
@@ -285,10 +436,18 @@ function renderSchedule(){
           <div class="card-actions"><button class="btn btn-secondary" style="padding:5px 10px;font-size:.85em" onclick="enterEditMode(${slot.id})">✏️ Edit Card</button></div>
           <h2 class="walk-title">${title}${modified ? '<span class="badge badge-modified">Modified</span>' : ''}</h2>
           <div class="walk-meta">
+            <span>🔢 <strong>Walk No:</strong> <span class="meta-tag">${slot.walkid}</span></span>
+            <span>🥾 <strong>Leader:</strong> ${leader}</span>
             <span>📏 <strong>Distance:</strong> ${distance}</span>
-            <span>🥾 <strong>Difficulty:</strong> <span class="meta-tag">${difficulty}</span></span>
+            <span>🏔️ <strong>Ascent:</strong> ${ascent}</span>
+            <span>⏱️ <strong>Total Time:</strong> ${total_time}</span>
+            <span>📊 <strong>Grade:</strong> <span class="meta-tag">${difficulty}</span></span>
+            <span>🪨 <strong>Terrain:</strong> ${terrain}</span>
+            <span>📋 <strong>Scr:</strong> ${scr}</span>
+            <span>🐕 <strong>Dogs:</strong> ${dogs}</span>
           </div>
           <p class="walk-desc">${description || '<em>No description available.</em>'}</p>
+          ${directions ? `<div class="walk-directions">📍 <strong>Directions:</strong> ${directions}</div>` : ''}
         </div>
       `;
     }
@@ -346,6 +505,47 @@ function resetToMaster(id){
   renderSchedule();
 }
 
+function exportCSV(){
+  const schedule = getSchedule();
+  if (!schedule.length) {
+    setInfo('There are no walks to export for the current filters.', true);
+    return;
+  }
+  
+  const headers = ["Date", "Start Time", "Walk Number", "Leader Name", "Route Name", "Distance", "Ascent", "Grade", "Terrain", "Scr", "Total Time", "Dogs", "Route Description", "Directions"];
+  
+  const rows = schedule.map(slot => {
+    const base = walkDatabase[slot.walkid] || {};
+    const overrides = slot.overrides || {};
+    
+    const date = slot.date;
+    const time = overrides.time || slot.time || 'N/A';
+    const walkNo = slot.walkid;
+    const leader = slot.leader_name || 'TBD';
+    const title = overrides.title || base.title || 'Unknown Walk';
+    const distance = overrides.distance || base.distance || 'N/A';
+    const ascent = base.ascent || 'N/A';
+    const grade = overrides.difficulty || base.difficulty || 'N/A';
+    const terrain = base.terrain || 'N/A';
+    const scr = base.scr || 'N/A';
+    const totalTime = base.total_time || 'N/A';
+    const dogs = base.dogs || 'N/A';
+    const desc = (overrides.description || base.description || '').replace(/"/g, '""');
+    const directions = (base.directions || '').replace(/"/g, '""');
+    
+    return [date, time, walkNo, leader, title, distance, ascent, grade, terrain, scr, totalTime, dogs, desc, directions].map(val => `"${val}"`).join(",");
+  });
+  
+  const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows].join("\n");
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "programme_schedule_export.csv");
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+
 function exportData(){
   const data = getSchedule();
   const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, null, 2));
@@ -369,10 +569,21 @@ function exportPDF(){
   window.print();
 }
 
-window.onload = () => {
-  populateWalkOptions();
-  renderSchedule();
-};
+window.clearDateField = clearDateField;
+window.clearWalkSearch = clearWalkSearch;
+window.refreshWalkOptions = refreshWalkOptions;
+window.setActiveWalk = setActiveWalk;
+window.createProgramme = createProgramme;
+window.clearAllFilters = clearAllFilters;
+window.exportCSV = exportCSV;
+window.exportData = exportData;
+window.exportPDF = exportPDF;
+window.enterEditMode = enterEditMode;
+window.cancelEdit = cancelEdit;
+window.saveOverride = saveOverride;
+window.resetToMaster = resetToMaster;
+
+window.addEventListener('DOMContentLoaded', initApp);
 </script>
 </body>
 </html>
