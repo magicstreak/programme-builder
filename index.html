@@ -166,9 +166,10 @@
     }
 
     .filter-info {
-      font-size: .85em;
+      font-size: .95em;
       color: #6c757d;
-      margin-top: 12px
+      margin-top: 12px;
+      font-weight: 500
     }
 
     .summary-card {
@@ -361,123 +362,116 @@
     }
 
     @media print {
-  body {
-    background: #fff;
-    color: #000;
-    padding: 10mm;
-    font-size: 11px; /* Slightly smaller base font to prevent unnecessary page overflows */
-  }
+      body {
+        background: #fff;
+        color: #000;
+        padding: 10mm;
+        font-size: 11px;
+      }
 
-  /* Hide web interface controls */
-  .header-actions, .filter-section, .card-actions, .btn-link, .badge {
-    display: none !important;
-  }
+      .header-actions, .filter-section, .card-actions, .btn-link, .badge {
+        display: none !important;
+      }
 
-  .container {
-    max-width: none;
-    width: 100%;
-  }
+      .container {
+        max-width: none;
+        width: 100%;
+      }
 
-  header h1 {
-    font-size: 20px;
-    margin-bottom: 2px;
-  }
+      header h1 {
+        font-size: 20px;
+        margin-bottom: 2px;
+      }
 
-  /* Compact top summary line */
-  .print-only {
-    display: block !important;
-    font-size: 12px;
-    font-weight: bold;
-    border-bottom: 1px solid #000;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-  }
-  
-  #programme-summary {
-    display: none !important; /* Hide large summary cards in print */
-  }
+      .print-only {
+        display: block !important;
+        font-size: 12px;
+        font-weight: bold;
+        border-bottom: 1px solid #000;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+      }
+      
+      #programme-summary {
+        display: none !important;
+      }
 
-  /* Transform large cards into clean, compressed rows */
-  .schedule-list {
-    gap: 6px !important; /* Tight spacing between entries */
-  }
+      .schedule-list {
+        gap: 6px !important;
+      }
 
-  .schedule-item {
-    display: block !important; /* Discard the bulky 2-column sidebar design */
-    border: none !important;
-    border-bottom: 1px dashed #ccc !important;
-    padding: 6px 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    break-inside: avoid;
-  }
+      .schedule-item {
+        display: block !important;
+        border: none !important;
+        border-bottom: 1px dashed #ccc !important;
+        padding: 6px 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+      }
 
-  /* Inline the Date and Time headers */
-  .schedule-item > div:first-child {
-    display: flex;
-    gap: 15px;
-    font-weight: bold;
-    font-size: 12px;
-    margin-bottom: 3px;
-    color: #000;
-  }
-  
-  .walk-date {
-    font-size: 12px !important;
-  }
-  
-  .walk-time {
-    margin-top: 0 !important;
-    font-size: 12px !important;
-  }
+      .schedule-item > div:first-child {
+        display: flex;
+        gap: 15px;
+        font-weight: bold;
+        font-size: 12px;
+        margin-bottom: 3px;
+        color: #000;
+      }
+      
+      .walk-date {
+        font-size: 12px !important;
+      }
+      
+      .walk-time {
+        margin-top: 0 !important;
+        font-size: 12px !important;
+      }
 
-  .walk-title {
-    font-size: 13px !important;
-    margin: 2px 0 !important;
-    display: inline-block;
-  }
+      .walk-title {
+        font-size: 13px !important;
+        margin: 2px 0 !important;
+        display: inline-block;
+      }
 
-  /* Convert the multi-line meta tags into a dense, comma-separated linear layout */
-  .walk-meta {
-    display: block !important; /* Strip grid layout */
-    margin-bottom: 4px !important;
-    font-size: 10px !important;
-    color: #333;
-  }
+      .walk-meta {
+        display: block !important;
+        margin-bottom: 4px !important;
+        font-size: 10px !important;
+        color: #333;
+      }
 
-  .walk-meta span {
-    display: inline !important;
-  }
+      .walk-meta span {
+        display: inline !important;
+      }
 
-  .walk-meta span:not(:last-child)::after {
-    content: " • "; /* Visual separator for data elements */
-    font-weight: bold;
-    color: #888;
-  }
+      .walk-meta span:not(:last-child)::after {
+        content: " • ";
+        font-weight: bold;
+        color: #888;
+      }
 
-  .meta-tag {
-    background: transparent !important;
-    padding: 0 !important;
-    font-weight: bold;
-  }
+      .meta-tag {
+        background: transparent !important;
+        padding: 0 !important;
+        font-weight: bold;
+      }
 
-  /* Compress Descriptions and Directions */
-  .walk-desc {
-    font-size: 10px !important;
-    line-height: 1.3 !important;
-    margin: 2px 0 !important;
-    color: #444;
-  }
+      .walk-desc {
+        font-size: 10px !important;
+        line-height: 1.3 !important;
+        margin: 2px 0 !important;
+        color: #444;
+      }
 
-  .walk-directions {
-    background: transparent !important;
-    border-left: 2px solid #666 !important;
-    padding: 2px 0 2px 8px !important;
-    margin-top: 3px !important;
-    font-size: 10px !important;
-  }
-}
-
+      .walk-directions {
+        background: transparent !important;
+        border-left: 2px solid #666 !important;
+        padding: 2px 0 2px 8px !important;
+        margin-top: 3px !important;
+        font-size: 10px !important;
+      }
+    }
   </style>
 </head>
 
@@ -541,10 +535,9 @@
     <div id="schedule" class="schedule-list"></div>
   </div>
 
-  <!-- Firebase Modular App Scripts Setup -->
   <script type="module">
-    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-    import {getDatabase, ref, get} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
     // Database 1: Calendar/Bookings App Connection Configuration
     const firebaseConfigCalendar = {
@@ -570,15 +563,14 @@
       measurementId: "G-BBQ4Q6TQHD"
     };
 
-    // Initialize distinct standalone instances
+    // Initialize standalone instances
     const calendarApp = initializeApp(firebaseConfigCalendar, "calendarInstance");
     const walksApp = initializeApp(firebaseConfigWalks, "walksInstance");
 
-    // Map target database connectivity layers
     const dbCalendar = getDatabase(calendarApp);
     const dbWalks = getDatabase(walksApp);
 
-    // Global application working matrices
+    // Global working state matrices
     let calendarSchedule = [];
     let walkDatabase = {};
 
@@ -590,7 +582,6 @@
     async function initApp() {
       setInfo("🔄 Synchronizing parallel records from Firebase...");
 
-      // 1. Safe fetch for Calendar Bookings (DB 1)
       let bookingsSnapshot = null;
       try {
         bookingsSnapshot = await get(ref(dbCalendar, 'walk_bookings'));
@@ -599,7 +590,6 @@
         setInfo("❌ Error loading calendar database check connection/rules.", true);
       }
 
-      // 2. Safe fetch for Master Walks (DB 2)
       let walksSnapshot = null;
       try {
         walksSnapshot = await get(ref(dbWalks, 'walks'));
@@ -607,20 +597,15 @@
         console.error("❌ Failed to fetch from DB 2 (Walks Master):", error);
       }
 
-      // 3. Clear existing states
       calendarSchedule = [];
       walkDatabase = {};
 
       if (walksSnapshot && walksSnapshot.exists()) {
         const rawWalksData = walksSnapshot.val();
-        walkDatabase = {};
-
-        console.group("🚀 Firebase DB 2 Fetch & Structuring Logic");
         Object.keys(rawWalksData).forEach(walkId => {
           const walk = rawWalksData[walkId] || {};
-
           walkDatabase[walkId] = {
-            title: walk.Route_Name || `Walk ${walkId}`,
+            title: walk.Route_Name || "Walk " + walkId,
             ascent: walk.Ascent || 'N/A',
             directions: walk.Directions || 'No directions listed.',
             distance: walk.Distance || 'N/A',
@@ -632,10 +617,8 @@
             total_time: walk.Total_Time || 'N/A'
           };
         });
-        console.groupEnd();
       }
 
-      // 5. Process Bookings from DB 1 if they exist
       if (bookingsSnapshot && bookingsSnapshot.exists()) {
         const firebaseData = bookingsSnapshot.val();
 
@@ -643,12 +626,12 @@
           const booking = firebaseData[key];
           const walkId = booking.walk_number;
 
-          const [day, month, year] = booking.date.split('-');
-          const standardDate = `${year}-${month}-${day}`;
+          const parts = booking.date.split('-');
+          const standardDate = parts[2] + "-" + parts[1] + "-" + parts[0];
 
           if (!walkDatabase[walkId]) {
             walkDatabase[walkId] = {
-              title: booking.pueblo ? `Walk to ${booking.pueblo}` : `Walk ${walkId}`,
+              title: booking.pueblo ? "Walk to " + booking.pueblo : "Walk " + walkId,
               ascent: 'N/A',
               directions: 'No directions available.',
               distance: 'Dynamic Route',
@@ -663,13 +646,12 @@
 
           calendarSchedule.push({
             id: index,
+            firebaseKey: key, 
             date: standardDate,
             time: booking.start_time || '10:00',
             walkid: walkId,
             leader_name: booking.leader_name || 'TBD',
-            overrides: (booking.comments) ? {
-              description: booking.comments || undefined
-            } : undefined
+            overrides: booking.overrides || (booking.comments ? { description: booking.comments } : undefined)
           });
         });
 
@@ -685,21 +667,24 @@
 
     function formatTime(value) {
       if (!value) return 'N/A';
-      const m = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(value);
-      if (!m) return value;
-      const h = Number(m[1]);
-      return `${((h + 11) % 12) + 1}:${m[2]} ${h >= 12 ? 'PM' : 'AM'}`;
+      const parts = value.split(':');
+      if (parts.length < 2) return value;
+      const h = Number(parts[0]);
+      const m = parts[1];
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const displayHour = ((h + 11) % 12) + 1;
+      return displayHour + ":" + m + " " + ampm;
     }
 
     function formatDate(value) {
       if (!value) return 'No Date';
-      return new Date(value + 'T00:00:00').toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'});
+      return new Date(value + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
     }
 
     function setInfo(message, isError = false) {
       const el = document.getElementById('filter-info');
       el.textContent = message;
-      el.style.color = isError ? '#dc3545' : '#6c757d';
+      el.style.color = isError ? '#dc3545' : '#2e7d32';
     }
 
     function populateWalkOptions() {
@@ -790,7 +775,7 @@
       activeTo = to;
       activeWalk = walk;
       const walkName = walk === 'all' ? 'All walks' : walkDatabase[walk].title;
-      setInfo(`Programme created: ${formatDate(from)} to ${formatDate(to)} — ${walkName}.`);
+      setInfo("Programme created: " + formatDate(from) + " to " + formatDate(to) + " - " + walkName + ".");
       renderSchedule();
       updateSummary();
     }
@@ -813,16 +798,16 @@
 
       const summary = document.getElementById('programme-summary');
       summary.innerHTML = `
-    <div class="summary-title">Programme summary</div>
-    <div class="summary-grid">
-      <div class="summary-item"><div class="summary-label">Showing</div><div class="summary-value">${schedule.length} / ${total} walks</div></div>
-      <div class="summary-item"><div class="summary-label">From</div><div class="summary-value">${fromLabel}</div></div>
-      <div class="summary-item"><div class="summary-label">To</div><div class="summary-value">${toLabel}</div></div>
-      <div class="summary-item"><div class="summary-label">Walk filter</div><div class="summary-value">${walkLabel}</div></div>
-    </div>
-  `;
+        <div class="summary-title">Programme summary</div>
+        <div class="summary-grid">
+          <div class="summary-item"><div class="summary-label">Showing</div><div class="summary-value">${schedule.length} / ${total} walks</div></div>
+          <div class="summary-item"><div class="summary-label">From</div><div class="summary-value">${fromLabel}</div></div>
+          <div class="summary-item"><div class="summary-label">To</div><div class="summary-value">${toLabel}</div></div>
+          <div class="summary-item"><div class="summary-label">Walk filter</div><div class="summary-value">${walkLabel}</div></div>
+        </div>
+      `;
 
-      document.getElementById('print-summary').textContent = `${fromLabel} to ${toLabel} • ${walkLabel} • ${schedule.length} walks`;
+      document.getElementById('print-summary').textContent = fromLabel + " to " + toLabel + " • " + walkLabel + " • " + schedule.length + " walks";
     }
 
     function renderSchedule() {
@@ -845,7 +830,7 @@
         const distance = overrides.distance || base.distance || 'N/A';
         const difficulty = overrides.difficulty || base.difficulty || 'N/A';
         const description = overrides.description || base.description || '';
-        const time = overrides.time || slot.time || 'N/A';
+        const time = overrides.time || slot.time || '10:00';
         const ascent = base.ascent || 'N/A';
         const directions = base.directions || '';
         const dogs = base.dogs || 'N/A';
@@ -855,56 +840,56 @@
         const leader = slot.leader_name || 'TBD';
 
         const item = document.createElement('div');
-        item.className = `schedule-item ${modified ? 'is-modified' : ''} ${currentEditingId === slot.id ? 'is-editing' : ''}`;
+        item.className = "schedule-item " + (modified ? 'is-modified' : '') + " " + (currentEditingId === slot.id ? 'is-editing' : '');
 
         if (currentEditingId === slot.id) {
           item.innerHTML = `
-        <div>
-          <div class="walk-date">${formatDate(slot.date)}</div>
-          <div class="walk-time">⏰ ${formatTime(slot.time)}</div>
-        </div>
-        <div class="edit-form">
-          <div class="form-row">
-            <div class="form-group"><label>Date</label><input type="date" value="${slot.date}" readonly></div>
-            <div class="form-group"><label>Time Override</label><input type="time" id="edit-time-${slot.id}" value="${overrides.time || slot.time || ''}"></div>
-          </div>
-          <div class="form-group"><label>Title Override</label><input type="text" id="edit-title-${slot.id}" value="${overrides.title || ''}" placeholder="Master: ${base.title || ''}"></div>
-          <div class="form-row">
-            <div class="form-group"><label>Distance Override</label><input type="text" id="edit-distance-${slot.id}" value="${overrides.distance || ''}" placeholder="Master: ${base.distance || ''}"></div>
-            <div class="form-group"><label>Difficulty Override</label><input type="text" id="edit-difficulty-${slot.id}" value="${overrides.difficulty || ''}" placeholder="Master: ${base.difficulty || ''}"></div>
-          </div>
-          <div class="form-group"><label>Description Override</label><textarea id="edit-desc-${slot.id}" placeholder="Master: ${base.description || ''}">${overrides.description || ''}</textarea></div>
-          <div class="edit-buttons">
-            <button class="btn" onclick="saveOverride(${slot.id})">Save Changes</button>
-            <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
-            ${modified ? `<button class="btn btn-danger" onclick="resetToMaster(${slot.id})">Reset to Master</button>` : ''}
-          </div>
-        </div>
-      `;
+            <div>
+              <div class="walk-date">${formatDate(slot.date)}</div>
+              <div class="walk-time">⏰ ${formatTime(time)}</div>
+            </div>
+            <div class="edit-form">
+              <div class="form-row">
+                <div class="form-group"><label>Date</label><input type="date" value="${slot.date}" readonly></div>
+                <div class="form-group"><label>Time Override</label><input type="time" id="edit-time-${slot.id}" value="${overrides.time || slot.time || ''}"></div>
+              </div>
+              <div class="form-group"><label>Title Override</label><input type="text" id="edit-title-${slot.id}" value="${overrides.title || ''}" placeholder="Master: ${base.title || ''}"></div>
+              <div class="form-row">
+                <div class="form-group"><label>Distance Override</label><input type="text" id="edit-distance-${slot.id}" value="${overrides.distance || ''}" placeholder="Master: ${base.distance || ''}"></div>
+                <div class="form-group"><label>Difficulty Override</label><input type="text" id="edit-difficulty-${slot.id}" value="${overrides.difficulty || ''}" placeholder="Master: ${base.difficulty || ''}"></div>
+              </div>
+              <div class="form-group"><label>Description Override</label><textarea id="edit-desc-${slot.id}" placeholder="Master: ${base.description || ''}">${overrides.description || ''}</textarea></div>
+              <div class="edit-buttons">
+                <button class="btn" onclick="saveOverride(${slot.id})">💾 Save Changes</button>
+                <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                ${modified ? `<button class="btn btn-danger" onclick="resetToMaster(${slot.id})">🔄 Reset to Master</button>` : ''}
+              </div>
+            </div>
+          `;
         } else {
           item.innerHTML = `
-        <div>
-          <div class="walk-date">${formatDate(slot.date)}</div>
-          <div class="walk-time">⏰ ${formatTime(time)}</div>
-        </div>
-        <div>
-          <div class="card-actions"><button class="btn btn-secondary" style="padding:5px 10px;font-size:.85em" onclick="enterEditMode(${slot.id})">✏️ Edit Card</button></div>
-          <h2 class="walk-title">${title}${modified ? '<span class="badge badge-modified">Modified</span>' : ''}</h2>
-          <div class="walk-meta">
-            <span>🔢 <strong>Walk No:</strong> <span class="meta-tag">${slot.walkid}</span></span>
-            <span>🥾 <strong>Leader:</strong> ${leader}</span>
-            <span>📏 <strong>Distance:</strong> ${distance}</span>
-            <span>🏔️ <strong>Ascent:</strong> ${ascent}</span>
-            <span>⏱️ <strong>Total Time:</strong> ${total_time}</span>
-            <span>📊 <strong>Grade:</strong> <span class="meta-tag">${difficulty}</span></span>
-            <span>🪨 <strong>Terrain:</strong> ${terrain}</span>
-            <span>📋 <strong>Scr:</strong> ${scr}</span>
-            <span>🐕 <strong>Dogs:</strong> ${dogs}</span>
-          </div>
-          <p class="walk-desc">${description || '<em>No description available.</em>'}</p>
-          ${directions ? `<div class="walk-directions">📍 <strong>Directions:</strong> ${directions}</div>` : ''}
-        </div>
-      `;
+            <div>
+              <div class="walk-date">${formatDate(slot.date)}</div>
+              <div class="walk-time">⏰ ${formatTime(time)}</div>
+            </div>
+            <div>
+              <div class="card-actions"><button class="btn btn-secondary" style="padding:5px 10px;font-size:.85em" onclick="enterEditMode(${slot.id})">✏️ Edit Card</button></div>
+              <h2 class="walk-title">${title}${modified ? '<span class="badge badge-modified">Modified</span>' : ''}</h2>
+              <div class="walk-meta">
+                <span>🔢 <strong>Walk No:</strong> <span class="meta-tag">${slot.walkid}</span></span>
+                <span>🥾 <strong>Leader:</strong> ${leader}</span>
+                <span>📏 <strong>Distance:</strong> ${distance}</span>
+                <span>🏔️ <strong>Ascent:</strong> ${ascent}</span>
+                <span>⏱️ <strong>Total Time:</strong> ${total_time}</span>
+                <span>📊 <strong>Grade:</strong> <span class="meta-tag">${difficulty}</span></span>
+                <span>🪨 <strong>Terrain:</strong> ${terrain}</span>
+                <span>📋 <strong>Scr:</strong> ${scr}</span>
+                <span>🐕 <strong>Dogs:</strong> ${dogs}</span>
+              </div>
+              <p class="walk-desc">${description || '<em>No description available.</em>'}</p>
+              ${directions ? `<div class="walk-directions">📍 <strong>Directions:</strong> ${directions}</div>` : ''}
+            </div>
+          `;
         }
 
         container.appendChild(item);
@@ -923,7 +908,7 @@
       renderSchedule();
     }
 
-    function saveOverride(id) {
+    async function saveOverride(id) {
       const slot = calendarSchedule.find(s => s.id === id);
       if (!slot) return;
 
@@ -935,29 +920,59 @@
         description: 'edit-desc-'
       };
 
-      const overrides = {};
+      const freshOverrides = {};
       Object.entries(fields).forEach(([key, prefix]) => {
         const el = document.getElementById(prefix + id);
         const value = el ? el.value.trim() : '';
-        if (value) overrides[key] = value;
+        
+        if (value) {
+          if (key === 'time' && value === slot.time && (!slot.overrides || !slot.overrides.time)) {
+            // Drop unedited timestamps
+          } else {
+            freshOverrides[key] = value;
+          }
+        }
       });
 
-      if (Object.keys(overrides).length > 0) {
-        slot.overrides = {...(slot.overrides || {}), ...overrides};
-      } else {
-        delete slot.overrides;
-      }
+      setInfo("⏳ Saving changes directly to Firebase...");
 
-      if (overrides.time) slot.time = overrides.time;
-      currentEditingId = null;
-      renderSchedule();
+      try {
+        const bookingRef = ref(dbCalendar, "walk_bookings/" + slot.firebaseKey);
+        
+        if (Object.keys(freshOverrides).length > 0) {
+          await update(bookingRef, { overrides: freshOverrides });
+          slot.overrides = freshOverrides;
+        } else {
+          await update(bookingRef, { overrides: null });
+          delete slot.overrides;
+        }
+
+        setInfo("✅ Overrides successfully saved to cloud database.");
+        currentEditingId = null;
+        renderSchedule();
+      } catch (error) {
+        console.error("❌ Failed to push overrides to Firebase:", error);
+        setInfo("❌ Database sync failed. Check write permissions.", true);
+      }
     }
 
-    function resetToMaster(id) {
+    async function resetToMaster(id) {
       const slot = calendarSchedule.find(s => s.id === id);
-      if (slot) delete slot.overrides;
-      currentEditingId = null;
-      renderSchedule();
+      if (!slot) return;
+
+      setInfo("⏳ Wiping overrides from Firebase...");
+      try {
+        const bookingRef = ref(dbCalendar, "walk_bookings/" + slot.firebaseKey);
+        await update(bookingRef, { overrides: null });
+        
+        delete slot.overrides;
+        setInfo("✅ Restored layout card back to master baseline values.");
+        currentEditingId = null;
+        renderSchedule();
+      } catch (error) {
+        console.error("❌ Failed to clear overrides from Firebase:", error);
+        setInfo("❌ Database sync failed while resetting.", true);
+      }
     }
 
     function exportCSV() {
@@ -974,7 +989,7 @@
         const overrides = slot.overrides || {};
 
         const date = slot.date;
-        const time = overrides.time || slot.time || 'N/A';
+        const time = overrides.time || slot.time || '10:00';
         const walkNo = slot.walkid;
         const leader = slot.leader_name || 'TBD';
         const title = overrides.title || base.title || 'Unknown Walk';
@@ -988,7 +1003,7 @@
         const desc = (overrides.description || base.description || '').replace(/"/g, '""');
         const directions = (base.directions || '').replace(/"/g, '""');
 
-        return [date, time, walkNo, leader, title, distance, ascent, grade, terrain, scr, totalTime, dogs, desc, directions].map(val => `"${val}"`).join(",");
+        return [date, time, walkNo, leader, title, distance, ascent, grade, terrain, scr, totalTime, dogs, desc, directions].map(val => '"' + val + '"').join(",");
       });
 
       const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows].join("\n");
@@ -1020,10 +1035,11 @@
       const fromValue = activeFrom ? formatDate(activeFrom) : 'Any date';
       const toValue = activeTo ? formatDate(activeTo) : 'Any date';
       const walkValue = activeWalk === 'all' ? 'All walks' : walkDatabase[activeWalk].title;
-      document.getElementById('print-summary').textContent = `Programme: ${fromValue} to ${toValue} • ${walkValue} • ${getSchedule().length} walks`;
+      document.getElementById('print-summary').textContent = "Programme: " + fromValue + " to " + toValue + " • " + walkValue + " • " + getSchedule().length + " walks";
       window.print();
     }
 
+    // Attach modules to window scoping context rules
     window.clearDateField = clearDateField;
     window.clearWalkSearch = clearWalkSearch;
     window.refreshWalkOptions = refreshWalkOptions;
