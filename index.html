@@ -831,6 +831,7 @@
         const difficulty = overrides.difficulty || base.difficulty || 'N/A';
         //const description = overrides.description || base.description || '';
         const description = overrides.description + '\n' + base.description || base.description ||'';
+        const add_comments = overrides.comments || slot.comments || 'N/A';
         const time = overrides.time || slot.time || '10:00';
         const ascent = base.ascent || 'N/A';
         const directions = base.directions || '';
