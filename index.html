@@ -651,7 +651,7 @@
             time: booking.start_time || '10:00',
             walkid: walkId,
             leader_name: booking.leader_name || 'TBD',
-            overrides: booking.overrides || (booking.comments ? { description: booking.comments } : undefined)
+            overrides: booking.overrides ||  undefined
           });
         });
 
