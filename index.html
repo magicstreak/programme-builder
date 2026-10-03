@@ -651,6 +651,8 @@
             time: booking.start_time || '10:00',
             walkid: walkId,
             leader_name: booking.leader_name || 'TBD',
+            comments: booking.comments || '',
+            dogs: booking.dogs || '',
             overrides: booking.overrides ||  undefined
           });
         });
@@ -835,7 +837,7 @@
         const time = overrides.time || slot.time || '10:00';
         const ascent = base.ascent || 'N/A';
         const directions = base.directions || '';
-        const dogs = base.dogs || 'N/A';
+        const dogs = overrides.dogs || slot.dogs || base.dogs || 'N/A';
         const scr = base.scr || 'N/A';
         const terrain = base.terrain || 'N/A';
         const total_time = base.total_time || 'N/A';
@@ -859,6 +861,8 @@
               <div class="form-row">
                 <div class="form-group"><label>Distance Override</label><input type="text" id="edit-distance-${slot.id}" value="${overrides.distance || ''}" placeholder="Master: ${base.distance || ''}"></div>
                 <div class="form-group"><label>Difficulty Override</label><input type="text" id="edit-difficulty-${slot.id}" value="${overrides.difficulty || ''}" placeholder="Master: ${base.difficulty || ''}"></div>
+                <div class="form-group"><label>Dogs Override</label><input type="text" id="edit-dogs-${slot.id}" value="${overrides.dogs || ''}" placeholder="Master: ${slot.dogs || base.dogs || ''}"></div>
+          
               </div>
               <div class="form-group"><label>Description Override</label><textarea id="edit-desc-${slot.id}" placeholder="Master: ${base.description || ''}">${overrides.description || ''}</textarea></div>
               <div class="form-group"><label>Comments Override</label><textarea id="edit-comments-${slot.id}" placeholder="Master: ${slot.comments || ''}">${overrides.comments || ''}</textarea></div>
@@ -923,7 +927,8 @@
         distance: 'edit-distance-',
         difficulty: 'edit-difficulty-',
         description: 'edit-desc-',
-        comments: 'edit-comments-'
+        comments: 'edit-comments-',
+        dogs: 'edit-dogs',
       };
 
       const freshOverrides = {};
