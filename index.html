@@ -830,7 +830,7 @@
         const distance = overrides.distance || base.distance || 'N/A';
         const difficulty = overrides.difficulty || base.difficulty || 'N/A';
         //const description = overrides.description || base.description || '';
-        const description = overrides.description + base.description || '';
+        const description = overrides.description + '\n' + base.description || base.description ||'';
         const time = overrides.time || slot.time || '10:00';
         const ascent = base.ascent || 'N/A';
         const directions = base.directions || '';
