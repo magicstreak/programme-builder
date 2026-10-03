@@ -831,7 +831,7 @@
         const difficulty = overrides.difficulty || base.difficulty || 'N/A';
         //const description = overrides.description || base.description || '';
         const description = overrides.description + '\n' + base.description || base.description ||'';
-        const add_comments = overrides.comments || slot.comments || 'N/A';
+        const comments = overrides.comments || slot.comments || 'N/A';
         const time = overrides.time || slot.time || '10:00';
         const ascent = base.ascent || 'N/A';
         const directions = base.directions || '';
@@ -861,7 +861,9 @@
                 <div class="form-group"><label>Difficulty Override</label><input type="text" id="edit-difficulty-${slot.id}" value="${overrides.difficulty || ''}" placeholder="Master: ${base.difficulty || ''}"></div>
               </div>
               <div class="form-group"><label>Description Override</label><textarea id="edit-desc-${slot.id}" placeholder="Master: ${base.description || ''}">${overrides.description || ''}</textarea></div>
+              <div class="form-group"><label>Comments Override</label><textare id="edit-comments-${slot.id}" placeholder="Master: ${slot.comments} || '' }">${overrides.comments} || ''}</textarea></div>
               <div class="edit-buttons">
+
                 <button class="btn" onclick="saveOverride(${slot.id})">💾 Save Changes</button>
                 <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
                 ${modified ? `<button class="btn btn-danger" onclick="resetToMaster(${slot.id})">🔄 Reset to Master</button>` : ''}
@@ -889,6 +891,7 @@
                 <span>🐕 <strong>Dogs:</strong> ${dogs}</span>
               </div>
               <p class="walk-desc">${description || '<em>No description available.</em>'}</p>
+              <p class="walk-desc">${comments} || '' }</p>
               ${directions ? `<div class="walk-directions">📍 <strong>Directions:</strong> ${directions}</div>` : ''}
             </div>
           `;
@@ -919,7 +922,8 @@
         title: 'edit-title-',
         distance: 'edit-distance-',
         difficulty: 'edit-difficulty-',
-        description: 'edit-desc-'
+        description: 'edit-desc-',
+        comments: 'edit-comments-'
       };
 
       const freshOverrides = {};
