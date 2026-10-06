@@ -697,6 +697,7 @@
             walkid: walkId,
             leader_name: booking.leader_name || 'TBD',
             comments: booking.comments || '',
+            notes: booking.notes,
             dogs: booking.dogs || '',
             overrides: booking.overrides ||  undefined
           });
@@ -879,6 +880,7 @@
         //const description = overrides.description || base.description || '';
         const description = overrides.description || base.description ||'';
         const comments = overrides.comments || slot.comments || '';
+        const notes = slot.notes || '';
         const time = overrides.time || slot.time || '10:00';
         const ascent = base.ascent || 'N/A';
         const directions = base.directions || '';
@@ -913,6 +915,7 @@
               </div>
               <div class="form-group"><label>Description</label><textarea id="edit-desc-${slot.id}" placeholder="${base.description || ''}">${overrides.description || ''}</textarea></div>
               <div class="form-group"><label>Comments</label><textarea id="edit-comments-${slot.id}" placeholder="${slot.comments || ''}">${overrides.comments || ''}</textarea></div>
+              <div class="form-group"><label>Notes</label><textarea id="edit-notes-${slot.id}" disabled placeholder="${slot.notes || ''}">${slot.notes || ''}</textarea></div>
               <div class="edit-buttons">
                 <button class="btn" onclick="saveOverride(${slot.id})">💾 Save Changes</button>
                 <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
