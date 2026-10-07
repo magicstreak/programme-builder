@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iterative Programme Builder</title>
+  <title>Walk Programme Builder</title>
   <style>
     :root {
       --primary: #2e7d32;
@@ -342,13 +342,58 @@
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px
+      gap: 12px
+    }
+
+    .form-row-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 420px
+    }
+
+    .form-row-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr))
+    }
+
+    .edit-form input::placeholder,
+    .edit-form textarea::placeholder {
+      color: #adb5bd
+    }
+
+    .edit-form input:focus,
+    .edit-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(46, 125, 50, .15)
+    }
+
+    .edit-form textarea {
+      min-height: 64px
+    }
+
+    .edit-hint {
+      font-size: .8em;
+      color: #6c757d;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border)
     }
 
     .edit-buttons {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-top: 5px
+      margin-top: 4px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border)
+    }
+
+    .edit-reset {
+      margin-left: auto
+    }
+
+    @media (max-width: 700px) {
+      .form-row-5 {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
     }
 
     .empty-state {
@@ -652,6 +697,7 @@
             walkid: walkId,
             leader_name: booking.leader_name || 'TBD',
             comments: booking.comments || '',
+            notes: booking.notes,
             dogs: booking.dogs || '',
             overrides: booking.overrides ||  undefined
           });
@@ -834,12 +880,13 @@
         //const description = overrides.description || base.description || '';
         const description = overrides.description || base.description ||'';
         const comments = overrides.comments || slot.comments || '';
+        const notes = slot.notes || '';
         const time = overrides.time || slot.time || '10:00';
         const ascent = base.ascent || 'N/A';
         const directions = base.directions || '';
         const dogs = overrides.dogs || slot.dogs || base.dogs || 'N/A';
-        const scr = base.scr || 'N/A';
-        const terrain = base.terrain || 'N/A';
+        const scr = overrides.scr || base.scr || 'N/A';
+        const terrain = overrides.terrain || base.terrain || 'N/A';
         const total_time = base.total_time || 'N/A';
         const leader = slot.leader_name || 'TBD';
 
@@ -853,24 +900,26 @@
               <div class="walk-time">⏰ ${formatTime(time)}</div>
             </div>
             <div class="edit-form">
-              <div class="form-row">
+              <div class="edit-hint">Leave a field blank to use the master value (shown as grey placeholder text).</div>
+              <div class="form-row form-row-2">
                 <div class="form-group"><label>Date</label><input type="date" value="${slot.date}" readonly></div>
-                <div class="form-group"><label>Time Override</label><input type="time" id="edit-time-${slot.id}" value="${overrides.time || slot.time || ''}"></div>
+                <div class="form-group"><label>Start Time</label><input type="time" id="edit-time-${slot.id}" value="${overrides.time || slot.time || ''}"></div>
               </div>
-              <div class="form-group"><label>Title Override</label><input type="text" id="edit-title-${slot.id}" value="${overrides.title || ''}" placeholder="Master: ${base.title || ''}"></div>
-              <div class="form-row">
-                <div class="form-group"><label>Distance Override</label><input type="text" id="edit-distance-${slot.id}" value="${overrides.distance || ''}" placeholder="Master: ${base.distance || ''}"></div>
-                <div class="form-group"><label>Difficulty Override</label><input type="text" id="edit-difficulty-${slot.id}" value="${overrides.difficulty || ''}" placeholder="Master: ${base.difficulty || ''}"></div>
-                <div class="form-group"><label>Dogs Override</label><input type="text" id="edit-dogs-${slot.id}" value="${overrides.dogs || ''}" placeholder="Master: ${slot.dogs || base.dogs || ''}"></div>
-          
+              <div class="form-group"><label>Title</label><input type="text" id="edit-title-${slot.id}" value="${overrides.title || ''}" placeholder="${base.title || ''}"></div>
+              <div class="form-row form-row-5">
+                <div class="form-group"><label>Distance</label><input type="text" id="edit-distance-${slot.id}" value="${overrides.distance || ''}" placeholder="${base.distance || ''}"></div>
+                <div class="form-group"><label>Grade</label><input type="text" id="edit-difficulty-${slot.id}" value="${overrides.difficulty || ''}" placeholder="${base.difficulty || ''}"></div>
+                <div class="form-group"><label>Terrain</label><input type="text" id="edit-terrain-${slot.id}" value="${overrides.terrain || ''}" placeholder="${base.terrain || ''}"></div>
+                <div class="form-group"><label>Scr</label><input type="text" id="edit-scr-${slot.id}" value="${overrides.scr || ''}" placeholder="${base.scr || ''}"></div>
+                <div class="form-group"><label>Dogs</label><input type="text" id="edit-dogs-${slot.id}" value="${overrides.dogs || ''}" placeholder="${slot.dogs || base.dogs || ''}"></div>
               </div>
-              <div class="form-group"><label>Description Override</label><textarea id="edit-desc-${slot.id}" placeholder="Master: ${base.description || ''}">${overrides.description || ''}</textarea></div>
-              <div class="form-group"><label>Comments Override</label><textarea id="edit-comments-${slot.id}" placeholder="Master: ${slot.comments || ''}">${overrides.comments || ''}</textarea></div>
+              <div class="form-group"><label>Description</label><textarea id="edit-desc-${slot.id}" placeholder="${base.description || ''}">${overrides.description || ''}</textarea></div>
+              <div class="form-group"><label>Comments</label><textarea id="edit-comments-${slot.id}" placeholder="${slot.comments || ''}">${overrides.comments || ''}</textarea></div>
+              <div class="form-group"><label>Notes</label><textarea id="edit-notes-${slot.id}" disabled placeholder="${slot.notes || ''}">${slot.notes || ''}</textarea></div>
               <div class="edit-buttons">
-
                 <button class="btn" onclick="saveOverride(${slot.id})">💾 Save Changes</button>
                 <button class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
-                ${modified ? `<button class="btn btn-danger" onclick="resetToMaster(${slot.id})">🔄 Reset to Master</button>` : ''}
+                ${modified ? `<button class="btn btn-danger edit-reset" onclick="resetToMaster(${slot.id})">🔄 Reset to Master</button>` : ''}
               </div>
             </div>
           `;
@@ -889,9 +938,7 @@
                 <span>📏 <strong>Distance:</strong> ${distance}</span>
                 <span>🏔️ <strong>Ascent:</strong> ${ascent}</span>
                 <span>⏱️ <strong>Total Time:</strong> ${total_time}</span>
-                <span>📊 <strong>Grade:</strong> <span class="meta-tag">${difficulty}</span></span>
-                <span>🪨 <strong>Terrain:</strong> ${terrain}</span>
-                <span>📋 <strong>Scr:</strong> ${scr}</span>
+                <span>📊 <strong>Grade/Terrain/Scr:</strong> <span class="meta-tag">${difficulty}/${terrain}/${scr}</span></span>
                 <span>🐕 <strong>Dogs:</strong> ${dogs}</span>
               </div>
               <p class="walk-desc">${description || '<em>No description available.</em>'}</p>
@@ -926,6 +973,8 @@
         title: 'edit-title-',
         distance: 'edit-distance-',
         difficulty: 'edit-difficulty-',
+        terrain: 'edit-terrain-',
+        scr: 'edit-scr-',
         description: 'edit-desc-',
         comments: 'edit-comments-',
         dogs: 'edit-dogs-'
@@ -1007,8 +1056,8 @@
         const distance = overrides.distance || base.distance || 'N/A';
         const ascent = base.ascent || 'N/A';
         const grade = overrides.difficulty || base.difficulty || 'N/A';
-        const terrain = base.terrain || 'N/A';
-        const scr = base.scr || 'N/A';
+        const terrain = overrides.terrain || base.terrain || 'N/A';
+        const scr = overrides.scr || base.scr || 'N/A';
         const totalTime = base.total_time || 'N/A';
         const dogs = base.dogs || 'N/A';
         const desc = (overrides.description || base.description || '').replace(/"/g, '""');
